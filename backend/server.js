@@ -12,6 +12,12 @@
   const uri = process.env.ATLAS_URI
   mongoose.connect(uri,{ useNewUrlParser:true, useCreateIndex:true,useUnifiedTopology: true })
 
+  const excercisesRouter = require('./routes/excercises')
+  const usersRouter = require('./routes/users')
+
+  app.use('/excercises',excercisesRouter)
+  app.use('/users',require('./routes/users'))
+
   const connection = mongoose.connection
   connection.once('open',()=>console.log('Database connected successfuly'))
-  app.listen(port, ()=>{console.log("Server listening")})
+  app.listen(port, ()=>{console.log("Server listening "+port)})
